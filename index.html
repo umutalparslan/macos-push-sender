@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+    <title>MacOS Push Sender</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Push Sender</h2>
+        </div>
+        <nav class="main-nav">
+            <a href="#" id="nav-push" class="nav-item active">Push Page</a>
+            <a href="#" id="nav-support" class="nav-item">Support the Developer</a>
+        </nav>
+        <div class="profile-manager" id="profile-manager">
+            <label for="profile-select">Configuration Profiles</label>
+            <select id="profile-select">
+                <option value="">Create New Profile...</option>
+            </select>
+            <div class="profile-buttons">
+                <button id="save-profile-btn" class="btn-primary">Save/Update</button>
+                <button id="delete-profile-btn" class="btn-danger">Delete</button>
+            </div>
+        </div>
+        <footer class="sidebar-footer">
+            <p>Umut Can Alparslan</p>
+            <p>
+        Version <span id="app-version"></span> 
+        (Build <span id="build-version"></span>)
+    </p>
+        </footer>
+    </aside>
+
+    <main class="main-content" id="push-page">
+        <form id="push-form">
+            <section class="form-section">
+                <div class="section-header">
+                    <h3>1. Core Configuration</h3>
+                    <p>Define a name for this profile and select the target platform.</p>
+                </div>
+                <div class="section-body">
+                    <div class="form-group">
+                        <label for="profile-name">Profile Name</label>
+                        <input type="text" id="profile-name" placeholder="e.g., MyApp (Production)" required>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="section-header">
+                    <h3>2. Authentication</h3>
+                    <p>Provide the necessary credentials for the selected platform.</p>
+                </div>
+                <div class="section-body">
+                    <div class="form-group">
+                        <label>Platform</label>
+                        <div class="radio-group">
+                            <input type="radio" id="platform-ios" name="platform" value="ios" checked>
+                            <label for="platform-ios">iOS</label>
+                            <input type="radio" id="platform-android" name="platform" value="android">
+                            <label for="platform-android">Android</label>
+                        </div>
+                    </div>
+
+                    <div id="ios-fields">
+                        <div class="form-group">
+                            <label>Environment</label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="is-production-env">
+                                Production
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="bundle-id">Bundle ID</label>
+                            <input type="text" id="bundle-id" placeholder="com.company.appname">
+                        </div>
+                        <div class="form-group">
+                            <label>Auth Method</label>
+                            <div class="radio-group">
+                                <input type="radio" id="cert-p8" name="cert-type" value="p8" checked>
+                                <label for="cert-p8">.p8 Token</label>
+                                <input type="radio" id="cert-p12" name="cert-type" value="p12">
+                                <label for="cert-p12">.p12 Certificate</label>
+                            </div>
+                        </div>
+
+                        <div id="p8-fields">
+                             <div class="form-group">
+                                <label>.p8 Auth Key File</label>
+                                <button type="button" class="file-picker-btn" data-target="p8-path">Select .p8 File</button>
+                                <span id="p8-path-display" class="file-path-display"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="key-id">Key ID</label>
+                                <input type="text" id="key-id" placeholder="e.g., ABC123DEFG">
+                            </div>
+                            <div class="form-group">
+                                <label for="team-id">Team ID</label>
+                                <input type="text" id="team-id" placeholder="e.g., XYZ987WERT">
+                            </div>
+                        </div>
+
+                        <div id="p12-fields" class="hidden">
+                             <div class="form-group">
+                                <label>.p12 Certificate File</label>
+                                <button type="button" class="file-picker-btn" data-target="p12-path">Select .p12 File</button>
+                                <span id="p12-path-display" class="file-path-display"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="p12-password">.p12 Password</label>
+                                <input type="password" id="p12-password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="android-fields" class="hidden">
+                        <div class="form-group">
+                            <label>Service Account JSON</label>
+                            <button type="button" class="file-picker-btn" data-target="sa-path">Select .json File</button>
+                            <span id="sa-path-display" class="file-path-display"></span>
+                        </div>
+                         <div class="form-group">
+                             <label>Test Mode</label>
+                             <label class="checkbox-label">
+                                <input type="checkbox" id="dry-run">
+                                Dry Run (Validate token without sending)
+                             </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="section-header">
+                    <h3>3. Delivery</h3>
+                    <p>Enter device tokens and the JSON payload for the notification.</p>
+                </div>
+                <div class="section-body">
+                    <div class="form-group">
+                        <label for="device-tokens">Device Tokens (one per line)</label>
+                        <textarea id="device-tokens" rows="8"></textarea>
+                    </div>
+                     <div class="form-group">
+                        <label for="payload">JSON Payload</label>
+                        <textarea id="payload" rows="12"></textarea>
+                    </div>
+                    <button id="send-push-btn" class="btn-send">Send Push Notification</button>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="section-header">
+                    <h3>4. Activity Log</h3>
+                </div>
+                <div id="log-area"></div>
+            </section>
+        </form>
+    </main>
+
+    <main class="main-content hidden" id="support-page">
+        <section class="form-section">
+            <div class="section-header">
+                <h3>Support the Developer</h3>
+                <p>If you find this tool useful, please consider supporting its development. Thank you!</p>
+            </div>
+            <div class="support-links">
+                 <a href="https://github.com/sponsors/umutalparslan" target="_blank" class="support-link github">
+                    <span class="support-link-text">Sponsor Umut Can Alparslan on</span>
+                    <span class="support-link-brand">GitHub Sponsors</span>
+                </a>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="./renderer.js"></script>
+</body>
+</html>
