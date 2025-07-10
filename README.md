@@ -26,7 +26,7 @@ This tool is designed for mobile developers and Q&A teams who need a straightfor
 
 The easiest way to get started is to download the latest official release.
 
-1.  Go to the [**Releases**](https://github.com/umutalparslan/MacOSPushSender/releases) page of this repository.
+1.  Go to the [**Releases**](https://github.com/umutalparslan/macos-push-sender/releases) page of this repository.
 2.  Download the latest `.dmg` file (e.g., `MacOS-Push-Sender-x.x.x.dmg`).
 3.  Open the `.dmg` file and drag the **MacOS Push Sender** app into your Applications folder.
 
@@ -38,7 +38,7 @@ If you want to run the project locally or contribute, follow these steps:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/umutalparslan/MacOSPushSender.git
+    git clone https://github.com/umutalparslan/macos-push-sender.git
     cd MacOSPushSender
     ```
 
