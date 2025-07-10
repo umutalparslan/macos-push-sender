@@ -1,6 +1,6 @@
 # MacOS Push Sender
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Sponsor @umutalparslan on GitHub](https://img.shields.io/badge/Sponsor-%40umutalparslan-EA4AAA?logo=github)](https://github.com/sponsors/umutalparslan)
 
 A simple, powerful, and elegant desktop application for macOS to send push notifications to iOS (APNs) and Android (FCM) devices.
 
