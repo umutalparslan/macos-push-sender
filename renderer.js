@@ -1,4 +1,9 @@
 // -- DOM ELEMENT SELECTION --
+const payloadTextarea = document.getElementById('payload');
+const previewTitle = document.getElementById('preview-title');
+const previewBody = document.getElementById('preview-body');
+const logFilterBtns = document.querySelectorAll('.log-filter-btn');
+const logArea = document.getElementById('log-area');
 const profileSelect = document.getElementById('profile-select');
 const saveProfileBtn = document.getElementById('save-profile-btn');
 const deleteProfileBtn = document.getElementById('delete-profile-btn');
@@ -13,9 +18,7 @@ const p8Fields = document.getElementById('p8-fields');
 const p12Fields = document.getElementById('p12-fields');
 const filePickerBtns = document.querySelectorAll('.file-picker-btn');
 const sendPushBtn = document.getElementById('send-push-btn');
-const logArea = document.getElementById('log-area');
 const tokensTextarea = document.getElementById('device-tokens');
-const payloadTextarea = document.getElementById('payload');
 
 
 // -- STATE & DEFAULTS --
@@ -66,9 +69,60 @@ saveProfileBtn.addEventListener('click', saveCurrentProfile);
 profileSelect.addEventListener('change', loadSelectedProfile);
 deleteProfileBtn.addEventListener('click', deleteSelectedProfile);
 sendPushBtn.addEventListener('click', handleSendPush);
+payloadTextarea.addEventListener('input', updatePreview);
+
+logFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Aktif butonu değiştir
+        logFilterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        // Logları filtrele
+        filterLogs(btn.dataset.filter);
+    });
+});
 
 
 // -- FUNCTIONS --
+
+function updatePreview() {
+    try {
+        const payload = JSON.parse(payloadTextarea.value);
+        let title = 'Notification Title';
+        let body = 'Notification body will appear here.';
+
+        // Hem APNs hem de FCM formatlarını kontrol et
+        if (payload.aps?.alert?.title) { // iOS
+            title = payload.aps.alert.title;
+            body = payload.aps.alert.body;
+        } else if (payload.notification?.title) { // Android
+            title = payload.notification.title;
+            body = payload.notification.body;
+        }
+
+        previewTitle.textContent = title;
+        previewBody.textContent = body;
+    } catch (e) {
+        // Geçersiz JSON ise önizlemeyi varsayılan durumda bırak
+        previewTitle.textContent = 'Invalid JSON';
+        previewBody.textContent = 'Please check your payload syntax.';
+    }
+}
+
+function filterLogs(filter) {
+    const allLogs = logArea.querySelectorAll('p');
+    allLogs.forEach(log => {
+        const logClass = log.className; // log-success, log-error, etc.
+        if (filter === 'all') {
+            log.style.display = 'block';
+        } else if (filter === 'success' && logClass.includes('success')) {
+            log.style.display = 'block';
+        } else if (filter === 'error' && logClass.includes('error')) {
+            log.style.display = 'block';
+        } else {
+            log.style.display = 'none';
+        }
+    });
+}
 
 
 async function loadProfiles() {

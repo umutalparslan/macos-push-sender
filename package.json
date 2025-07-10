@@ -1,7 +1,7 @@
 {
   "name": "macos-push-sender",
   "productName": "MacOS Push Sender",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "Push Notification Tool for iOS and Android",
   "main": "main.js",
   "scripts": {

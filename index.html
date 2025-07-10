@@ -41,8 +41,10 @@
     </aside>
 
     <main class="main-content">
-        <form id="push-form">
-            <section class="form-section">
+    <div class="main-grid">
+        <div class="form-container">
+            <form id="push-form">
+                <section class="form-section">
                 <div class="section-header">
                     <h3>1. Core Configuration</h3>
                     <p>Define a name for this profile and select the target platform.</p>
@@ -156,15 +158,47 @@
                     <button id="send-push-btn" class="btn-send">Send Push Notification</button>
                 </div>
             </section>
+                </form>
+        </div>
+
+        <div class="preview-log-container">
+            <section class="form-section">
+                <div class="section-header">
+                    <h3>Live Notification Preview</h3>
+                    
+                </div>
+                <small>Please change all payload or change anything inside the payload</small>
+                <div class="preview-box">
+                    <div class="device-bezel">
+                        <div class="notification-preview">
+                            <div class="notification-header">
+                                <img src="./assets/icon.png" width="40px" class="app-icon" alt="App Icon">
+                                <span class="app-name">Your App</span>
+                                <span class="notification-time">now</span>
+                            </div>
+                            <div class="notification-content">
+                                <p class="notification-title" id="preview-title">Notification Title</p>
+                                <p class="notification-body" id="preview-body">This is the body of your push notification. It will update as you type.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <section class="form-section">
                 <div class="section-header">
-                    <h3>4. Activity Log</h3>
+                    <h3>Activity Log</h3>
+                    <div class="log-filters">
+                        <button class="log-filter-btn active" data-filter="all">All</button>
+                        <button class="log-filter-btn" data-filter="success">Success</button>
+                        <button class="log-filter-btn" data-filter="error">Error</button>
+                    </div>
                 </div>
                 <div id="log-area"></div>
             </section>
-        </form>
-    </main>
+        </div>
+    </div>
+</main>
 
 </div>
 
