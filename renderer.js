@@ -17,11 +17,6 @@ const logArea = document.getElementById('log-area');
 const tokensTextarea = document.getElementById('device-tokens');
 const payloadTextarea = document.getElementById('payload');
 
-const navSettings = document.getElementById('nav-push');
-const navSupport = document.getElementById('nav-support');
-const settingsPage = document.getElementById('push-page');
-const supportPage = document.getElementById('support-page');
-const profileManager = document.getElementById('profile-manager');
 
 // -- STATE & DEFAULTS --
 let filePaths = {
@@ -72,33 +67,9 @@ profileSelect.addEventListener('change', loadSelectedProfile);
 deleteProfileBtn.addEventListener('click', deleteSelectedProfile);
 sendPushBtn.addEventListener('click', handleSendPush);
 
-navSettings.addEventListener('click', (e) => {
-    e.preventDefault();
-    showPage('settings');
-});
-
-navSupport.addEventListener('click', (e) => {
-    e.preventDefault();
-    showPage('support');
-});
 
 // -- FUNCTIONS --
 
-function showPage(pageName) {
-    if (pageName === 'settings') {
-        settingsPage.classList.remove('hidden');
-        supportPage.classList.add('hidden');
-        profileManager.classList.remove('hidden');
-        navSettings.classList.add('active');
-        navSupport.classList.remove('active');
-    } else if (pageName === 'support') {
-        settingsPage.classList.add('hidden');
-        supportPage.classList.remove('hidden');
-        profileManager.classList.add('hidden');
-        navSettings.classList.remove('active');
-        navSupport.classList.add('active');
-    }
-}
 
 async function loadProfiles() {
     const profiles = await window.api.getProfiles();

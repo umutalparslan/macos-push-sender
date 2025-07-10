@@ -1,12 +1,12 @@
 {
   "name": "macos-push-sender",
   "productName": "MacOS Push Sender",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Push Notification Tool for iOS and Android",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "CSC_NAME=\"Apple Development: Umut Can Alparslan (42268M2FPW)\" electron-builder"
+    "dist": "CSC_NAME=\"Umut Can Alparslan (AS5QFQY7ZW)\" electron-builder --publish always"
   },
   "keywords": [],
   "author": "Umut Can Alparslan",
@@ -14,7 +14,8 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^37.2.0",
-    "electron-builder": "^26.0.12"
+    "electron-builder": "^26.0.12",
+    "electron-reloader": "^1.2.3"
   },
   "dependencies": {
     "electron-store": "^7.0.3",
@@ -27,6 +28,11 @@
       "category": "public.app-category.productivity",
       "target": "dmg",
       "icon": "assets/icon.icns"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "umutalparslan",
+      "repo": "macos-push-sender"
     },
     "productName": "MacOS Push Sender",
     "buildVersion": "1"

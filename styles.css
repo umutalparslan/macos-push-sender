@@ -201,32 +201,6 @@ input[type="radio"], input[type="checkbox"] {
 .log-success { color: var(--accent-green); }
 .log-error { color: var(--accent-red); }
 
-.main-nav {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.nav-item {
-    padding: 10px 15px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.nav-item:hover {
-    background-color: var(--bg-light);
-    color: var(--text-primary);
-}
-
-.nav-item.active {
-    background-color: var(--accent-blue);
-    color: white;
-    font-weight: 500;
-}
-
 /* Destek Sayfası Stilleri */
 .support-links {
     margin-top: 20px;
@@ -267,3 +241,27 @@ input[type="radio"], input[type="checkbox"] {
     color: #000;
 }
 .support-link.github { background-color: #181717; }
+
+
+.sponsor-section {
+    margin-top: 30px;
+}
+
+.sponsor-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background-color: #24292F;
+    color: #E6EDF3;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+
+.sponsor-button:hover {
+    background-color: #30363D;
+}
